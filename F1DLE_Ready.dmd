@@ -1,8 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="F1DLE_Ready" id="0985BDC2-817B-B5CC-1D49-ECEBC5164E13" version="3.5">
-<createdBy>Dell</createdBy>
-<createdTime>2024-11-04 13:32:21 UTC</createdTime>
-<ownerDesignName>test</ownerDesignName>
-<capitalNames>false</capitalNames>
-<designId>0985BDC2-817B-B5CC-1D49-ECEBC5164E13</designId>
-</OSDM_Design>
