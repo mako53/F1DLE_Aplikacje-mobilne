@@ -1,0 +1,640 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "F1DLE",
+    "version": "1.0.0",
+    "description": "Dokumentacja REST API"
+  },
+  "paths": {
+    "/api/admin/login": {
+      "post": {
+        "summary": "Logowanie administratora",
+        "description": "Logowanie do panelu administratora w celu zarządzania danymi o kierowcach.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": {
+                    "type": "string",
+                    "example": "admin"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "password"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Logowanie zakończone sukcesem.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Login successful"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Błędne dane logowania.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Incorrect login informations"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/game/start": {
+      "post": {
+        "summary": "Rozpoczęcie nowej gry",
+        "description": "Rozpoczęcie nowej gry i wylosowanie kierowcy, którego gracz musi odgadnąć.",
+        "responses": {
+          "200": {
+            "description": "Gra rozpoczęta pomyślnie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "gameId": {
+                      "type": "string",
+                      "example": "12345"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Game started successfully"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/game/guess": {
+      "post": {
+        "summary": "Przesłanie odpowiedzi gracza",
+        "description": "Gracz wprowadza imię i nazwisko potencjalnego kierowcy.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "guess": {
+                    "type": "string",
+                    "example": "Max Verstappen"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Wynik odpowiedzi",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "correct": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "hints": {
+                      "type": "object",
+                      "properties": {
+                        "age_hint": {
+                          "type": "object",
+                          "properties": {
+                            "direction": {
+                              "type": "string",
+                              "enum": [
+                                "up",
+                                "down",
+                                "correct"
+                              ],
+                              "example": "up"
+                            },
+                            "color": {
+                              "type": "string",
+                              "enum": [
+                                "green",
+                                "red"
+                              ],
+                              "example": "red"
+                            }
+                          }
+                        },
+                        "starting_number_hint": {
+                          "type": "object",
+                          "properties": {
+                            "direction": {
+                              "type": "string",
+                              "enum": [
+                                "up",
+                                "down",
+                                "correct"
+                              ],
+                              "example": "down"
+                            },
+                            "color": {
+                              "type": "string",
+                              "enum": [
+                                "green",
+                                "red"
+                              ],
+                              "example": "red"
+                            }
+                          }
+                        },
+                        "nationality_hint": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "correct",
+                                "incorrect"
+                              ],
+                              "example": "correct"
+                            },
+                            "color": {
+                              "type": "string",
+                              "enum": [
+                                "green",
+                                "red"
+                              ],
+                              "example": "green"
+                            }
+                          }
+                        },
+                        "last_team_hint": {
+                          "type": "object",
+                          "properties": {
+                            "status": {
+                              "type": "string",
+                              "enum": [
+                                "correct",
+                                "incorrect"
+                              ],
+                              "example": "correct"
+                            },
+                            "color": {
+                              "type": "string",
+                              "enum": [
+                                "green",
+                                "red"
+                              ],
+                              "example": "green"
+                            }
+                          }
+                        },
+                        "num_of_starts_hint": {
+                          "type": "object",
+                          "properties": {
+                            "direction": {
+                              "type": "string",
+                              "enum": [
+                                "up",
+                                "down",
+                                "correct"
+                              ],
+                              "example": "correct"
+                            },
+                            "color": {
+                              "type": "string",
+                              "enum": [
+                                "green",
+                                "red"
+                              ],
+                              "example": "green"
+                            }
+                          }
+                        },
+                        "scored_points_hint": {
+                          "type": "object",
+                          "properties": {
+                            "direction": {
+                              "type": "string",
+                              "enum": [
+                                "up",
+                                "down",
+                                "correct"
+                              ],
+                              "example": "up"
+                            },
+                            "color": {
+                              "type": "string",
+                              "enum": [
+                                "green",
+                                "red"
+                              ],
+                              "example": "red"
+                            }
+                          }
+                        },
+                        "num_of_podiums_hint": {
+                          "type": "object",
+                          "properties": {
+                            "direction": {
+                              "type": "string",
+                              "enum": [
+                                "up",
+                                "down",
+                                "correct"
+                              ],
+                              "example": "down"
+                            },
+                            "color": {
+                              "type": "string",
+                              "enum": [
+                                "green",
+                                "red"
+                              ],
+                              "example": "red"
+                            }
+                          }
+                        },
+                        "year_of_debut_hint": {
+                          "type": "object",
+                          "properties": {
+                            "direction": {
+                              "type": "string",
+                              "enum": [
+                                "up",
+                                "down",
+                                "correct"
+                              ],
+                              "example": "correct"
+                            },
+                            "color": {
+                              "type": "string",
+                              "enum": [
+                                "green",
+                                "red"
+                              ],
+                              "example": "green"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/game/status": {
+      "get": {
+        "summary": "Status gry",
+        "description": "Zwraca obecny status gry, informując czy gra dalej trwa i w jakim jest etapie.",
+        "responses": {
+          "200": {
+            "description": "Status gry",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "gameId": {
+                      "type": "string",
+                      "example": "12345"
+                    },
+                    "gameStatus": {
+                      "type": "string",
+                      "example": "in progress"
+                    },
+                    "guessesLeft": {
+                      "type": "integer",
+                      "example": 3
+                    },
+                    "correctAnswer": {
+                      "type": "string",
+                      "example": "Sebastian Vettel"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/game/achievements": {
+      "get": {
+        "summary": "Lista osiągnięć gracza",
+        "description": "Zwraca listę osiągnięć gracza, które zdobył w grze.",
+        "responses": {
+          "200": {
+            "description": "Lista osiągnięć",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "achievementName": {
+                        "type": "string",
+                        "example": "Złoty strzał"
+                      },
+                      "achievedOn": {
+                        "type": "string",
+                        "example": "2024-11-12"
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Player guessed the drawn driver in the first try."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/drivers": {
+      "post": {
+        "summary": "Dodanie nowego kierowcy",
+        "description": "Dodaje nowego kierowcę do bazy danych (dostępne tylko dla administratora).",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Lando Norris"
+                  },
+                  "age": {
+                    "type": "integer",
+                    "example": 24
+                  },
+                  "starting_number": {
+                    "type": "integer",
+                    "example": 34
+                  },
+                  "nationality": {
+                    "type": "string",
+                    "example": "British"
+                  },
+                  "last_team": {
+                    "type": "string",
+                    "example": "McLaren"
+                  },
+                  "num_of_starts": {
+                    "type": "integer",
+                    "example": 3
+                  },
+                  "scored_points": {
+                    "type": "integer",
+                    "example": 250
+                  },
+                  "num_of_podiums": {
+                    "type": "integer",
+                    "example": 100
+                  },
+                  "year_of_debut": {
+                    "type": "integer",
+                    "example": 2020
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Kierowca został dodany",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The driver was added successfully."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Błąd przy dodawaniu kierowcy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Error in adding driver."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/drivers/{driverId}": {
+      "put": {
+        "summary": "Edytowanie danych kierowcy",
+        "description": "Edytuje dane istniejącego kierowcy w bazie danych (dostępne tylko dla administratora).",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "driverId",
+            "required": true,
+            "description": "ID kierowcy do edycji.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Lando Norris"
+                  },
+                  "age": {
+                    "type": "integer",
+                    "example": 24
+                  },
+                  "starting_number": {
+                    "type": "integer",
+                    "example": 34
+                  },
+                  "nationality": {
+                    "type": "string",
+                    "example": "British"
+                  },
+                  "last_team": {
+                    "type": "string",
+                    "example": "McLaren"
+                  },
+                  "num_of_starts": {
+                    "type": "integer",
+                    "example": 6
+                  },
+                  "scored_points": {
+                    "type": "integer",
+                    "example": 187
+                  },
+                  "num_of_podiums": {
+                    "type": "integer",
+                    "example": 34
+                  },
+                  "year_of_debut": {
+                    "type": "integer",
+                    "example": 2021
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Dane kierowcy zostały zaktualizowane pomyślnie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The driver's data updated successfully."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Błąd przy edytowaniu danych kierowcy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Error in updating driver's data."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Kierowca nie odnaleziony",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The driver not found."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Usuwanie kierowcy",
+        "description": "Usuwa kierowcę z bazy danych (dostępne tylko dla administratora).",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "driverId",
+            "required": true,
+            "description": "ID kierowcy do usunięcia.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Kierowca został usunięty pomyślnie",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The driver was successfully deleted"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Kierowca nie odnaleziony",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "The driver not found."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
