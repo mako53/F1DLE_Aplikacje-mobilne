@@ -1,0 +1,353 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(to right, #000, #696969, #660000);
+}
+
+.container {
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.title {
+    color: #AAAAAA;
+    font-size: 5vw;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 1px;
+    text-shadow: 5px 5px 5px #000;
+    letter-spacing: 20px;
+}
+
+.button-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+#manualButton, #badgesButton {
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    width: 22%;
+    height: 40px;
+    color: #e9e9e9;
+    font-size: 1vw;
+    background-color: #000;
+    border: 2px solid #960000;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#manualButton:hover, #badgesButton:hover {
+    background-color: #960000;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+.input-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+#driverInput {
+    width: 80%;
+    max-width: 300px;
+    height: 40px;
+    font-size: 1rem;
+    color: #e9e9e9;
+    background-color: #000;
+    border: 2px solid #960000;
+    border-radius: 25px;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.suggestion-box {
+   list-style: none;
+    padding: 0;
+    margin: 5px 0 0;
+    background-color: #191919;
+    border-radius: 8px;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 80%;
+    max-width: 300px;
+    color: #e9e9e9;
+    position: absolute;
+    z-index: 10;
+}
+
+.suggestion-box li {
+    padding: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid #333;
+}
+
+.suggestion-box li:hover {
+    background-color: #960000;
+    color: #fff;
+}
+
+#checkButton {
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    width: 150px;
+    height: 40px;
+    font-size: 1rem;
+    color: #e9e9e9;
+    background-color: #000;
+    border: 2px solid #960000;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#checkButton:hover {
+    background-color: #960000;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+.categoryLabels-row, .gameBox-container {
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    gap: 10px;
+    width: 100%;
+}
+
+.categoryLabels {
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    color: #e9e9e9;
+    background-color: #000000;
+    border: 2px solid #960000;
+    border-radius: 25px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.gameBox-row {
+    display: contents;
+}
+
+.data-box {
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #191919;
+    border: 2px solid #960000;
+    border-radius: 25px;
+}
+
+.data-box.correct {
+    background-color: #28a745; /* Zielona dla poprawnych */
+    border-color: #155d27;
+}
+
+.data-box.incorrect {
+    background-color: #dc3545; /* Czerwona dla błędnych */
+    border-color: #721c24;
+}
+
+.gameBox-container {
+    grid-auto-rows: 80px;
+}
+
+.mPopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(to right, #000, #696969, #660000);
+    color: #e9e9e9;
+    padding: 20px;
+    border: 2px solid #960000;
+    width: 300px;
+    border-radius: 8px;
+}
+
+.bPopup {
+    display: none;
+    font-size: 0.75rem;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(to right, #000, #696969, #660000);
+    color: #e9e9e9;
+    padding: 20px;
+    border: 2px solid #960000;
+    width: 500px;
+    border-radius: 8px;
+}
+
+#manualPopup button,
+#badgesPopup button {
+    width: 80px; /* Mniejsze przyciski */
+    height: 30px;
+    font-size: 0.8rem;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    color: #e9e9e9;
+    background-color: #000;
+    border: 2px solid #960000;
+    border-radius: 15px; /* Mniejsze zaokrąglenie */
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#manualPopup button:hover,
+#badgesPopup button:hover {
+    background-color: #960000;
+    transform: scale(1.1); /* Subtelna animacja */
+    transition: all 0.3s ease;
+}
+
+.mDesc {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.mBox {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #960000;
+    margin-right: 10px;
+}
+
+.popup-title {
+    font-size: 2rem; /* Rozmiar czcionki */
+    color: #AAAAAA; /* Kolor czcionki */
+    text-transform: uppercase; /* Duże litery */
+    font-family: 'Orbitron', sans-serif; /* Styl czcionki */
+    text-align: center; /* Wyrównanie do środka */
+    text-shadow: 2px 2px 4px #000; /* Cień tekstu */
+    margin-bottom: 20px; /* Odstęp poniżej napisu */
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(to right, #000, #696969, #660000);
+    color: #e9e9e9;
+    padding: 30px;
+    border: 2px solid #960000;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    z-index: 1000;
+}
+
+.popup button {
+    width: 150px;
+    height: 40px;
+    margin: 10px;
+    font-size: 1rem;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    color: #e9e9e9;
+    background-color: #000;
+    border: 2px solid #960000;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.popup button:hover {
+    background-color: #960000;
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+}
+
+body.popup-active #selectionPopup {
+    overflow: hidden;
+    pointer-events: all;
+    opacity: 1; /* Popup nie jest przyciemniony */
+}
+
+/* Blokuj zawartość podczas aktywnego popupu */
+body.popup-active .container {
+    pointer-events: none;
+}
+
+#selectionPopup {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+}
+
+#loginPopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(to right, #000, #696969, #660000);
+    color: #e9e9e9;
+    padding: 20px;
+    border: 2px solid #960000;
+    width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1200; /* Wyższy priorytet niż inne elementy */
+}
+
+#loginPopup .input-group {
+    margin-bottom: 15px;
+}
+
+#loginPopup .input-group label {
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #e9e9e9;
+}
+
+#loginPopup .input-group input {
+    width: 100%;
+    padding: 8px;
+    font-size: 1rem;
+    border: 2px solid #960000;
+    border-radius: 5px;
+    background-color: #000;
+    color: #e9e9e9;
+}
+
+/* Stylizacja przycisków: Login i Close mają ten sam wygląd */
+#loginPopup button {
+    width: 100px;
+    height: 35px;
+    font-size: 1rem;
+    color: #e9e9e9;
+    background-color: #000;
+    border: 2px solid #960000;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#loginPopup button:hover {
+    background-color: #960000;
+    transform: scale(1.05);
+}
